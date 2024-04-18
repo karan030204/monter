@@ -4,13 +4,17 @@ import { useState, useEffect } from "react";
 import data from "../../api/data.json";
 
 const Modal = ({ onClose, children, title }) => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(
     Math.ceil(data.length / itemsPerPage)
   );
   const [isMounted, setIsMounted] = useState(false);
+
+  console.log(totalPages, "Total Pages ");
+  useEffect(() => {
+    setTotalPages(Math.ceil(data.length / itemsPerPage));
+  }, [itemsPerPage]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -30,23 +34,25 @@ const Modal = ({ onClose, children, title }) => {
 
   // Function to convert time to 24-hour format
   const convertTimeStringTo24HourFormat = (timeString) => {
-    const [time, meridian] = timeString.split(' ');
-    let [hours, minutes] = time.split(':');
-    if (meridian === 'PM') {
+    const [time, meridian] = timeString.split(" ");
+    let [hours, minutes] = time.split(":");
+    if (meridian === "PM") {
       hours = (parseInt(hours, 10) + 12).toString();
     }
-    return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+    return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
   };
 
-//   const sortByDate = (a, b) => {
-//     return new Date(b.date) - new Date(a.date);
-//   };
+  console.log(data.length, "", itemsPerPage, "", totalPages);
 
-  
+  //   const sortByDate = (a, b) => {
+  //     return new Date(b.date) - new Date(a.date);
+  //   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = [...data].sort(sortByDateTime).slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = [...data]
+    .sort(sortByDateTime)
+    .slice(indexOfFirstItem, indexOfLastItem);
 
   const handleCloseClick = (e) => {
     e.preventDefault();
@@ -58,7 +64,6 @@ const Modal = ({ onClose, children, title }) => {
   }
 
   // Sorting function
- 
 
   console.log(totalPages);
 
@@ -68,15 +73,17 @@ const Modal = ({ onClose, children, title }) => {
       continue;
     }
 
-    if (i >= totalPages) {
-      break;
+    if(currentPage > totalPages){
+        setCurrentPage(1)
+    }
+    if (i > totalPages) {
+      //   setCurrentPage(totalPages)
+    //   setCurrentPage(1)
+    break;
     }
 
     pageNumber.push(i);
   }
-
-
-
 
   return (
     <div className="modal-overlay">
@@ -129,7 +136,8 @@ const Modal = ({ onClose, children, title }) => {
             <button
               type=""
               onClick={() => {
-                setCurrentPage(currentPage - 1);
+
+                setCurrentPage(currentPage == 1 ? currentPage : currentPage - 1);
               }}
             >
               prev
@@ -152,7 +160,7 @@ const Modal = ({ onClose, children, title }) => {
             <button
               type=""
               onClick={() => {
-                setCurrentPage(currentPage + 1);
+                setCurrentPage(currentPage == totalPages ? currentPage  : currentPage+ 1);
               }}
             >
               next
