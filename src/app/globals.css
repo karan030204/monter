@@ -79,3 +79,11 @@ tr:nth-child(even) {
 
   background-color: #dddddd;
 }
+
+.page_no{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+
+}

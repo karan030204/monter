@@ -6,18 +6,17 @@ import data from "../../api/data.json";
 const Modal = ({ onClose, children, title }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [totalPages, setTotalPages] = useState(data.length / itemsPerPage);
+  const [totalPages, setTotalPages] = useState(Math.ceil(data.length / itemsPerPage));
   const [isMounted, setIsMounted] = useState(false);
-
 
   useEffect(() => {
     setIsMounted(true);
     return () => setIsMounted(false);
   }, []);
 
-  const indexOfLastItem = currentPage*itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem)
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleCloseClick = (e) => {
     e.preventDefault();
@@ -28,20 +27,19 @@ const Modal = ({ onClose, children, title }) => {
     return null; // Don't render the modal on the server
   }
 
+  console.log(totalPages);
 
-  let pageNumber = []
-  for (let i = currentPage-5; index <= currentPage+5; index++) {
-
-    if(i<1){
-        continue;
+  let pageNumber = [];
+  for (let i = currentPage - 5; i <= currentPage + 5; i++) {
+    if (i < 1) {
+      continue;
     }
 
-    if(i >= totalPages){
-        break;
+    if (i >= totalPages) {
+      break;
     }
 
-    pageNumber.push(i)
-    
+    pageNumber.push(i);
   }
 
   return (
@@ -82,16 +80,21 @@ const Modal = ({ onClose, children, title }) => {
           <div className="modal-body">{children}</div> */}
           <label for="">Rows per page </label>
           <select
-    onChange={(e)=>{setItemsPerPage(parseInt(e.target.value))}}
+            onChange={(e) => {
+              setItemsPerPage(parseInt(e.target.value));
+            }}
           >
-            
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
-
           </select>
 
-
+<div className="page_no">
+    
+          {pageNumber.map((item, index) => {
+              return <div key={index}>{item}</div>;
+            })}
+            </div>
         </div>
       </div>
     </div>
