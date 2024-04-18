@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .modal-wrapper {
   display: flex;
@@ -10,6 +11,12 @@
   height: 100px;
 }
 
+.modal-header-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 
 .modal {
   position: relative;
@@ -17,17 +24,18 @@
   flex-direction: column;
   gap: 20px;
   background: white;
-  height:700px;
-  width: 1000px;
+  height: 700px;
+  width: 70vw;
   border-radius: 15px;
-  padding: 15px;
+  /* padding: 15px; */
   overflow: scroll;
-
-
+  padding: 20px 0;
 }
 
-.table-header{
-  background-color: rgba(0,0,0,0.3);
+.table-header {
+  background-color: rgba(0, 0, 0, 0.1);
+  /* font-family: "Poppins"; */
+  font-weight: 900;
 }
 
 .modal-overlay {
@@ -47,44 +55,48 @@
 }
 
 .modal-header {
+  position: fixed;
+  background-color: white;
+  padding: 10px 40px;
   display: flex;
+  width: 70vw;
   align-items: center;
   justify-content: space-between;
   font-size: 25px;
-
+  z-index: 99999;
+  font-family: 'Montserrat';
+  font-weight: 900;
+  top: 0;
 }
 
-.modal-title{
+.modal-title {
   font-size: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-
 }
 
-.table{
+.table {
   width: max-content;
   position: relative;
 }
 
 table {
-  
-  font-family: arial, sans-serif;
   border-collapse: collapse;
-  height:500px;
-  width: 100%;
+  height: 500px;
+  width: 70vw;
+  font-weight: 500;
+margin-top: 30px;
+
   /* overflow: scroll; */
-
-
-  
 }
 
-td, th {
+td,
+th {
   /* border: 1px solid #dddddd; */
   text-align: left;
-  padding: 8px;
+  padding: 10px 20px;
 }
 
-
+td{
+font-size: 20px;}
 /* 
 tr:nth-child(even) {
   position: relative;
@@ -92,62 +104,67 @@ tr:nth-child(even) {
   background-color: #dddddd;
 } */
 
-.page_no{
+.page_no {
   justify-content: center;
   align-items: center;
   display: flex;
   gap: 20px;
-
 }
 
-.page_numbers{
+.page_numbers {
   justify-content: center;
   align-items: center;
   display: flex;
   gap: 10px;
 }
-.page_no .open{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.page_no .number{
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+
+
+.page_no .open.number {
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 10px;
+  padding: 5px 10px;
   background-color: red;
-  padding: 2px 5px;
-  width: 30px;
-  height: 30px;
-  border-radius : 50%;
   color: white;
 }
 
-
-.prev, .next{
-  background-color: rgba(0,0,0,0.1);
+.prev,
+.next {
+  background-color: rgba(0, 0, 0, 0.1);
   padding: 5px 10px;
   border-radius: 10px;
-color: black;
+  color: black;
 }
 
-
-
-
-.pagination_numbers{
+.pagination_numbers {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  bottom: 0;
+  position: fixed;
+  background-color: white;
+  padding: 30px;
+  width: 70vw;
 
+  
 }
 
-
-.dropdown{
+.dropdown {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
 }
 
-
-select{
+select {
   border: 1px solid black;
   border-radius: 10px;
   padding: 2px 5px;
@@ -157,13 +174,17 @@ select{
   display: none;
 }
 
+.reportName{
+  padding: 0;
+  margin: 0;
+}
 .downloadTime {
   font-size: 20px;
   color: gray;
 }
 
-.download-icon{
+.download-icon {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 }

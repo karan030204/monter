@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import data from "../../api/data.json";
 import { IoCloudDownloadOutline } from "react-icons/io5";
+import { BsFilterCircleFill } from "react-icons/bs";
+import { IoCloseCircleSharp } from "react-icons/io5";
+
 
 const Modal = ({ onClose, children, title }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -91,28 +94,28 @@ const Modal = ({ onClose, children, title }) => {
           <div className="modal-header">
             <div></div>
             <div className="modal-title">Recently Generated Reports</div>
-            <div>
-              <a href="#" onClick={handleCloseClick}>
-                x
+            <div className="modal-header-icons">
+              <a href="#" >
+              <BsFilterCircleFill size={32}/>
               </a>
               <a href="#" onClick={handleCloseClick}>
-                x
+              <IoCloseCircleSharp size={40}/>
               </a>
             </div>
           </div>
           <div className="table">
             <table>
-              <tr className="table-header">
+              <thead className="table-header">
                 <th>Date</th>
                 <th>Report Name</th>
                 <th>Download</th>
-              </tr>
+              </thead>
               {currentItems.map((item, index) => {
                 return (
                   <tr className="entry" key={index}>
                     <td>
                       <div className="date">{item.date}</div>
-                      <div className="downloadTime">{item.downloadTime}</div>
+                      {/* <div className="downloadTime">{item.downloadTime}</div> */}
                     </td>
                     <td>{item.reportName}</td>
                     <td className="download-icon">
@@ -156,7 +159,7 @@ const Modal = ({ onClose, children, title }) => {
                   return (
                     <div key={index}>
                       <button
-                        className={currentPage == item ? "open" : ""}
+                        className={currentPage == item ? "open number" : "number"}
                         type=""
                         onClick={(e) => {
                           setCurrentPage(item);
