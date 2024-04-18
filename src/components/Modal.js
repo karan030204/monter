@@ -6,7 +6,9 @@ import data from "../../api/data.json";
 const Modal = ({ onClose, children, title }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [totalPages, setTotalPages] = useState(Math.ceil(data.length / itemsPerPage));
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(data.length / itemsPerPage)
+  );
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const Modal = ({ onClose, children, title }) => {
   console.log(totalPages);
 
   let pageNumber = [];
-  for (let i = currentPage - 5; i <= currentPage + 5; i++) {
+  for (let i = currentPage - 2; i <= currentPage+2; i++) {
     if (i < 1) {
       continue;
     }
@@ -89,12 +91,22 @@ const Modal = ({ onClose, children, title }) => {
             <option value="30">30</option>
           </select>
 
-<div className="page_no">
-    
-          {pageNumber.map((item, index) => {
-              return <div key={index}>{item}</div>;
+          <div className="page_no">
+            {pageNumber.map((item, index) => {
+              return (
+                <div key={index}>
+                  <button
+                    type=""
+                    onClick={(e) => {
+                      setCurrentPage(item);
+                    }}
+                  >
+                    {item}
+                  </button>
+                </div>
+              );
             })}
-            </div>
+          </div>
         </div>
       </div>
     </div>
