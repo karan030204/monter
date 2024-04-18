@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import data from "../../api/data.json";
 
 const Modal = ({ onClose, children, title }) => {
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(
@@ -92,10 +94,13 @@ const Modal = ({ onClose, children, title }) => {
           </select>
 
           <div className="page_no">
+            <button type="" onClick={()=>{setCurrentPage(currentPage-1)}}>prev</button>
             {pageNumber.map((item, index) => {
               return (
                 <div key={index}>
                   <button
+
+                    className={currentPage == item ? "open" : ""}
                     type=""
                     onClick={(e) => {
                       setCurrentPage(item);
@@ -106,6 +111,8 @@ const Modal = ({ onClose, children, title }) => {
                 </div>
               );
             })}
+            <button type="" onClick={()=>{setCurrentPage(currentPage+1)}}>next</button>
+
           </div>
         </div>
       </div>

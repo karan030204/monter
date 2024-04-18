@@ -87,3 +87,9 @@ tr:nth-child(even) {
   gap: 5px;
 
 }
+
+
+.page_no .open{
+  background-color: red;
+  color: white;
+}
