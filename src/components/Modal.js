@@ -1,7 +1,7 @@
 // components/Modal.js
-
 import { useState, useEffect } from "react";
 import data from "../../api/data.json";
+import { IoCloudDownloadOutline } from "react-icons/io5";
 
 const Modal = ({ onClose, children, title }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,15 +73,14 @@ const Modal = ({ onClose, children, title }) => {
       continue;
     }
 
-    if(currentPage > totalPages){
-        setCurrentPage(1)
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
     }
     if (i > totalPages) {
-      //   setCurrentPage(totalPages)
-    //   setCurrentPage(1)
-    break;
+      // setCurrentPage(totalPages)
+      //   setCurrentPage(1)
+      break;
     }
-
     pageNumber.push(i);
   }
 
@@ -103,17 +102,22 @@ const Modal = ({ onClose, children, title }) => {
           </div>
           <div className="table">
             <table>
-              <tr>
+              <tr className="table-header">
                 <th>Date</th>
                 <th>Report Name</th>
                 <th>Download</th>
               </tr>
               {currentItems.map((item, index) => {
                 return (
-                  <tr key={index}>
-                    <td>{item.date}</td>
+                  <tr className="entry" key={index}>
+                    <td>
+                      <div className="date">{item.date}</div>
+                      <div className="downloadTime">{item.downloadTime}</div>
+                    </td>
                     <td>{item.reportName}</td>
-                    <td>{item.downloadTime}</td>
+                    <td className="download-icon">
+                      <IoCloudDownloadOutline />
+                    </td>
                   </tr>
                 );
               })}
@@ -121,50 +125,61 @@ const Modal = ({ onClose, children, title }) => {
           </div>
           {/* {title && <h1>{title}</h1>}
           <div className="modal-body">{children}</div> */}
-          <label for="">Rows per page </label>
-          <select
-            onChange={(e) => {
-              setItemsPerPage(parseInt(e.target.value));
-            }}
-          >
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-          </select>
+          <div className="pagination_numbers">
+            <div className="dropdown">
+              <label for="">Rows per page </label>
+              <select
+                onChange={(e) => {
+                  setItemsPerPage(parseInt(e.target.value));
+                }}
+              >
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
 
-          <div className="page_no">
-            <button
-              type=""
-              onClick={() => {
-
-                setCurrentPage(currentPage == 1 ? currentPage : currentPage - 1);
-              }}
-            >
-              prev
-            </button>
-            {pageNumber.map((item, index) => {
-              return (
-                <div key={index}>
-                  <button
-                    className={currentPage == item ? "open" : ""}
-                    type=""
-                    onClick={(e) => {
-                      setCurrentPage(item);
-                    }}
-                  >
-                    {item}
-                  </button>
-                </div>
-              );
-            })}
-            <button
-              type=""
-              onClick={() => {
-                setCurrentPage(currentPage == totalPages ? currentPage  : currentPage+ 1);
-              }}
-            >
-              next
-            </button>
+            <div className="page_no">
+              <button
+                className="prev"
+                type=""
+                onClick={() => {
+                  setCurrentPage(
+                    currentPage == 1 ? currentPage : currentPage - 1
+                  );
+                }}
+              >
+                prev
+              </button>
+              <div className="page_numbers">
+                {pageNumber.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <button
+                        className={currentPage == item ? "open" : ""}
+                        type=""
+                        onClick={(e) => {
+                          setCurrentPage(item);
+                        }}
+                      >
+                        {item}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                className="next"
+                type=""
+                onClick={() => {
+                  setCurrentPage(
+                    currentPage == totalPages ? currentPage : currentPage + 1
+                  );
+                }}
+              >
+                next
+              </button>
+            </div>
           </div>
         </div>
       </div>
