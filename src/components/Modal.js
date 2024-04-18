@@ -71,7 +71,7 @@ const Modal = ({ onClose, children, title }) => {
   console.log(totalPages);
 
   let pageNumber = [];
-  for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+  for (let i = currentPage ; i <= currentPage + 4; i++) {
     if (i < 1) {
       continue;
     }
