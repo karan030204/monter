@@ -55,9 +55,9 @@
 }
 
 .modal-header {
-  position: fixed;
+
   background-color: white;
-  padding: 10px 40px;
+  padding: 1px 40px;
   display: flex;
   width: 70vw;
   align-items: center;
@@ -66,7 +66,6 @@
   z-index: 99999;
   font-family: 'Montserrat';
   font-weight: 900;
-  top: 0;
 }
 
 .modal-title {
@@ -79,12 +78,9 @@
 }
 
 table {
-  border-collapse: collapse;
-  height: 500px;
+  /* height: 500px; */
   width: 70vw;
   font-weight: 500;
-margin-top: 30px;
-
   /* overflow: scroll; */
 }
 
