@@ -2,7 +2,7 @@
 
 import Modal from "../../components/Modal.js";
 import React,{useState} from 'react'
-import data from "../../../api/data.json"
+
 
 const page = () => {
     const [showModal, setShowModal] = useState(false);

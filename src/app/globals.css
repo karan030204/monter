@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 .modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 500px;
   height: 600px;
 }
@@ -13,10 +16,11 @@
   flex-direction: column;
   gap: 20px;
   background: white;
-  height:100%;
+  height:max-content;
   width:max-content;
   border-radius: 15px;
   padding: 15px;
+
 
 }
 
@@ -55,6 +59,7 @@
 }
 
 table {
+
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
