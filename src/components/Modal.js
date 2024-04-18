@@ -5,7 +5,6 @@ import data from "../../api/data.json";
 
 const Modal = ({ onClose, children, title }) => {
 
-
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(
@@ -18,9 +17,36 @@ const Modal = ({ onClose, children, title }) => {
     return () => setIsMounted(false);
   }, []);
 
+  const sortByDateTime = (a, b) => {
+    const dateComparison = new Date(b.date) - new Date(a.date);
+    if (dateComparison !== 0) {
+      return dateComparison;
+    }
+    // If dates are equal, compare times
+    const timeA = convertTimeStringTo24HourFormat(b.downloadTime);
+    const timeB = convertTimeStringTo24HourFormat(a.downloadTime);
+    return timeA.localeCompare(timeB);
+  };
+
+  // Function to convert time to 24-hour format
+  const convertTimeStringTo24HourFormat = (timeString) => {
+    const [time, meridian] = timeString.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (meridian === 'PM') {
+      hours = (parseInt(hours, 10) + 12).toString();
+    }
+    return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+  };
+
+//   const sortByDate = (a, b) => {
+//     return new Date(b.date) - new Date(a.date);
+//   };
+
+  
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = [...data].sort(sortByDateTime).slice(indexOfFirstItem, indexOfLastItem);
 
   const handleCloseClick = (e) => {
     e.preventDefault();
@@ -31,10 +57,13 @@ const Modal = ({ onClose, children, title }) => {
     return null; // Don't render the modal on the server
   }
 
+  // Sorting function
+ 
+
   console.log(totalPages);
 
   let pageNumber = [];
-  for (let i = currentPage - 2; i <= currentPage+2; i++) {
+  for (let i = currentPage - 2; i <= currentPage + 2; i++) {
     if (i < 1) {
       continue;
     }
@@ -45,6 +74,9 @@ const Modal = ({ onClose, children, title }) => {
 
     pageNumber.push(i);
   }
+
+
+
 
   return (
     <div className="modal-overlay">
@@ -94,12 +126,18 @@ const Modal = ({ onClose, children, title }) => {
           </select>
 
           <div className="page_no">
-            <button type="" onClick={()=>{setCurrentPage(currentPage-1)}}>prev</button>
+            <button
+              type=""
+              onClick={() => {
+                setCurrentPage(currentPage - 1);
+              }}
+            >
+              prev
+            </button>
             {pageNumber.map((item, index) => {
               return (
                 <div key={index}>
                   <button
-
                     className={currentPage == item ? "open" : ""}
                     type=""
                     onClick={(e) => {
@@ -111,8 +149,14 @@ const Modal = ({ onClose, children, title }) => {
                 </div>
               );
             })}
-            <button type="" onClick={()=>{setCurrentPage(currentPage+1)}}>next</button>
-
+            <button
+              type=""
+              onClick={() => {
+                setCurrentPage(currentPage + 1);
+              }}
+            >
+              next
+            </button>
           </div>
         </div>
       </div>
