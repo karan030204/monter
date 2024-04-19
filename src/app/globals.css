@@ -36,7 +36,6 @@
 
 .resume-btn button{
   letter-spacing: 1px;
-  text-transform: uppercase;
   color: white;
   background-color: rgb(23, 27, 34);
   font-size: 40px;
@@ -53,7 +52,6 @@
 }
 .assignment-btn button{
   letter-spacing: 1px;
-  text-transform: uppercase;
   color: white;
   background-color: rgb(40, 98, 206);
   font-size: 40px;
