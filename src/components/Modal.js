@@ -5,7 +5,6 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 import { BsFilterCircleFill } from "react-icons/bs";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
-
 const Modal = ({ onClose, children, title }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -71,7 +70,7 @@ const Modal = ({ onClose, children, title }) => {
   console.log(totalPages);
 
   let pageNumber = [];
-  for (let i = currentPage ; i <= currentPage + 4; i++) {
+  for (let i = currentPage; i <= currentPage + 4; i++) {
     if (i < 1) {
       continue;
     }
@@ -95,11 +94,11 @@ const Modal = ({ onClose, children, title }) => {
             <div></div>
             <div className="modal-title">Recently Generated Reports</div>
             <div className="modal-header-icons">
-              <a href="#" >
-              <BsFilterCircleFill size={32}/>
+              <a href="#">
+                <BsFilterCircleFill size={32} />
               </a>
               <a href="#" onClick={handleCloseClick}>
-              <IoCloseCircleSharp size={40}/>
+                <IoCloseCircleSharp size={40} />
               </a>
             </div>
           </div>
@@ -115,7 +114,7 @@ const Modal = ({ onClose, children, title }) => {
                   <tr className="entry" key={index}>
                     <td>
                       <div className="date">{item.date}</div>
-                      {/* <div className="downloadTime">{item.downloadTime}</div> */}
+                      <div className="downloadTime">{item.downloadTime}</div>
                     </td>
                     <td>{item.reportName}</td>
                     <td className="download-icon">
@@ -159,7 +158,9 @@ const Modal = ({ onClose, children, title }) => {
                   return (
                     <div key={index}>
                       <button
-                        className={currentPage == item ? "open number" : "number"}
+                        className={
+                          currentPage == item ? "open number" : "number"
+                        }
                         type=""
                         onClick={(e) => {
                           setCurrentPage(item);
